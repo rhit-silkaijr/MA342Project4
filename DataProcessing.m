@@ -28,3 +28,4 @@ dataOutput(:,7) = table2array(GME(1:248, pricesUsed));
 dataOutput(:,8) = table2array(HMY(1:248, pricesUsed));
 dataOutput(:,9) = table2array(NFLX(1:248, pricesUsed));
 dataOutput(:,10) = table2array(RDDT(1:248, pricesUsed));
+
