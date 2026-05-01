@@ -2,25 +2,24 @@ function [P] = StockSimulation(Po, t)
 %Po is the history of a specific stock
 %t is how long you want to predict out (ex. 21 for a month barring weekends)
 
-    % TODO: do these
-    mu = .03; % Are these derived or assumed?
-    sigma = .15; % Are these derived or assumed?
-    % Is Po(0) supposed to be the first or last value of Po?
+    PoDiff = zeros(1,length(Po)-1);
 
-    phi = normalize(Po); % randn
+    for i=1:length(Po)-1
+        PoDiff(i) = Po(i+1)-Po(i);
+    end
 
-    phiIndx = rand(1,t) * (length(Po)-1);
-    phiIndx = round(sort(phiIndx))+1;
-    phi = phi(phiIndx);
+    mu = mean(PoDiff);
+    sigma = std(PoDiff);
 
-    %phi = randn(1,t);
+    phi = randn(1,t);
 
     P = zeros(1,t);
     for to = 1:t
-        P(to) = Po(length(Po))*exp((mu - (sigma^2)/2)*to + sigma*sqrt(to)*phi(to));
+        Pt = Po(length(Po));
+        P(to) = Pt*exp((mu - (sigma^2)/2)*to + sigma*sqrt(to)*phi(to));
+        %P(to) = Pt + mu * Pt * to + sigma * Pt * sqrt(to) + phi(to);
     end
     % Append the initial value to the beginning
     P = [Po(length(Po)) P];
 
 end
-
