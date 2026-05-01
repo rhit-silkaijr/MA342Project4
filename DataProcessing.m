@@ -11,6 +11,20 @@ function [dateRange, stockIndex, dataOutput] = DataProcessing(pricesUsed)
     HMY = readtable("StockData/HARMONY GOLD MNG LTD (05-02-2025 _ 04-28-2026).csv");
     NFLX = readtable("StockData/NETFLIX INC. (02-12-2025 _ 04-28-2026).csv");
     RDDT = readtable("StockData/REDDIT INC (05-02-2025 _ 04-28-2026).csv");
+
+    % Luke's Stock
+    SNDK = readtable("StockData/SANDISK.csv");
+    RVMD = readtable("StockData/RVMD.csv");
+    RKLB = readtable("StockData/RKLB.csv");
+    NVDA = readtable("StockData/NVIDIA.csv");
+    LITE = readtable("StockData/LITE.csv");
+    FIX = readtable("StockData/FIX.csv");
+    CIEN = readtable("StockData/CIEN.csv");
+    ASTS = readtable("StockData/ASTS.csv");
+    AAPL = readtable("StockData/APPLE.csv");
+    AMD = readtable("StockData/AMD.csv");
+
+
     GME(1,:);
     GME.Properties.VariableNames;
     
