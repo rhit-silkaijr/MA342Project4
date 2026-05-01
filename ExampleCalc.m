@@ -2,7 +2,7 @@
 R = (P(2:end,:)-P(1:end-1,:))./P(1:end-1,:);
 r = mean(R);
 C = cov(R);
-n = 10;
+n = 20;
 numPoints = 50;
 alphaOptions = linspace(0, 1, numPoints);
 expReturn = linspace(0, 1, numPoints);

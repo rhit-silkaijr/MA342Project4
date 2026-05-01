@@ -30,16 +30,28 @@ function [dateRange, stockIndex, dataOutput] = DataProcessing(pricesUsed)
     
     % Get it all preproccessed to the same date range
     dateRange = table2array(ADBE(1:248, 1));
-    stockIndex = ["ADBE","ADSK","DVLT","BIRD","FLUT","FDS","GME","HMY","NFLX","RDDT"];
-    dataOutput = zeros(248,10);
-    dataOutput(:,1) = table2array(ADBE(1:248, pricesUsed));
-    dataOutput(:,2) = table2array(ADSK(1:248, pricesUsed));
-    dataOutput(:,3) = table2array(DVLT(1:248, pricesUsed));
-    dataOutput(:,4) = table2array(BIRD(1:248, pricesUsed));
-    dataOutput(:,5) = table2array(FLUT(1:248, pricesUsed));
-    dataOutput(:,6) = table2array(FDS(1:248, pricesUsed));
-    dataOutput(:,7) = table2array(GME(1:248, pricesUsed));
-    dataOutput(:,8) = table2array(HMY(1:248, pricesUsed));
-    dataOutput(:,9) = table2array(NFLX(1:248, pricesUsed));
-    dataOutput(:,10) = table2array(RDDT(1:248, pricesUsed));
+    stockIndex = ["AAPL", "ADBE","ADSK", "AMD", "ASTS", ...
+        "BIRD", "CIEN", "DVLT", "FIX", "FLUT","FDS","GME", ...
+        "HMY", "LITE", "NFLX", "NVDA", "RDDT", "RKLB", "RVMD", "SNDK"];
+    dataOutput = zeros(248,20);
+    dataOutput(:,1) = table2array(AAPL(3:250, pricesUsed));
+    dataOutput(:,2) = table2array(ADBE(1:248, pricesUsed));
+    dataOutput(:,3) = table2array(ADSK(1:248, pricesUsed));
+    dataOutput(:,4) = table2array(AMD(3:250, pricesUsed));
+    dataOutput(:,5) = table2array(ASTS(3:250, pricesUsed));
+    dataOutput(:,6) = table2array(BIRD(1:248, pricesUsed));
+    dataOutput(:,7) = table2array(CIEN(3:250, pricesUsed));
+    dataOutput(:,8) = table2array(DVLT(1:248, pricesUsed));
+    dataOutput(:,9) = table2array(FIX(3:250, pricesUsed));
+    dataOutput(:,10) = table2array(FLUT(1:248, pricesUsed));
+    dataOutput(:,11) = table2array(FDS(1:248, pricesUsed));
+    dataOutput(:,12) = table2array(GME(1:248, pricesUsed));
+    dataOutput(:,13) = table2array(HMY(1:248, pricesUsed));
+    dataOutput(:,14) = table2array(LITE(3:250, pricesUsed));
+    dataOutput(:,15) = table2array(NFLX(1:248, pricesUsed));
+    dataOutput(:,16) = table2array(NVDA(3:250, pricesUsed));
+    dataOutput(:,17) = table2array(RDDT(1:248, pricesUsed));
+    dataOutput(:,18) = table2array(RKLB(3:250, pricesUsed));
+    dataOutput(:,19) = table2array(RVMD(3:250, pricesUsed));
+    dataOutput(:,20) = table2array(SNDK(3:250, pricesUsed));
 end
