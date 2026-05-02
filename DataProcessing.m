@@ -1,5 +1,18 @@
+%% DataProcessing
+% Computes stock prices into matrices given price points 
+%
+%% Inputs
+% 
+%   pricesUsed  :   (1x1 double) 2 for open, 3 for high, 4 for low, 5 for close
+%
+%% Outputs
+%
+%   dataRange   :   (nx1 datetime) all dates from matching stock prices
+%   stockIndex  :   (1xn string) all stock trading symbols
+%   dataOutput  :   (nxn double) all stock prices for all given dates
+
 function [dateRange, stockIndex, dataOutput] = DataProcessing(pricesUsed)
-    % pricesUsed: 2 for open, 3 for high, 4 for low, 5 for close
+
     
     ADBE = readtable("StockData/ADOBE INC (01-21-2025 _ 04-28-2026).csv");
     ADSK = readtable("StockData/AUTODESK INC (05-02-2025 _ 04-28-2026).csv");
@@ -24,11 +37,14 @@ function [dateRange, stockIndex, dataOutput] = DataProcessing(pricesUsed)
     AAPL = readtable("StockData/APPLE.csv");
     AMD = readtable("StockData/AMD.csv");
 
-
-    GME(1,:);
-    GME.Properties.VariableNames;
+    % TODO: Remove these if not needed
+    % GME(1,:);
+    % GME.Properties.VariableNames;
     
     % Get it all preproccessed to the same date range
+    % Note that for certain stocks, the date ranges are
+    % different, so in order for them to align, we have to
+    % index them through slightly different points
     dateRange = table2array(ADBE(1:248, 1));
     stockIndex = ["AAPL", "ADBE","ADSK", "AMD", "ASTS", ...
         "BIRD", "CIEN", "DVLT", "FIX", "FLUT","FDS","GME", ...
