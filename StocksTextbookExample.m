@@ -24,8 +24,9 @@ alpha = 0.5;
 inv_limit = 0.20;
 [w, optVal] = quadprog((1-alpha)*2*C, -alpha*r, [], [], ones(1,n), [1], zeros(n,1), inv_limit*ones(n,1));
 
-Dt = 21;
+Dt = 50;
 
 P_pred = StockSimulation(P, Dt);
-
+figure;
+plot(P_pred);
 
