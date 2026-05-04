@@ -20,7 +20,7 @@ function [P] = StockSimulation(Po, t)
     % for every single day
     phi = randn(1,t);
 
-    P = zeros(n,t);
+    P = zeros(t,n);
     for to = 1:t
             Pt = Po(length(Po), :);
             P(to, :) = Pt.*exp((mu - (sigma.^2)./2).*to + sigma.*sqrt(to).*phi(to));
