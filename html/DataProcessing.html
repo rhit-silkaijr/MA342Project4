@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>DataProcessing</title>
+<meta name="generator" content="MATLAB 26.1">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2026-05-02">
+<meta name="DC.source" content="DataProcessing.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h1>DataProcessing</h1>
+<!--introduction-->
+<p>Computes stock prices into matrices given price points</p>
+<!--/introduction-->
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">Inputs</a>
+</li>
+<li>
+<a href="#2">Outputs</a>
+</li>
+</ul>
+</div>
+<h2 id="1">Inputs</h2>
+<pre class="language-matlab">pricesUsed  :   (1x1 double) 2 <span class="keyword">for</span> open, 3 <span class="keyword">for</span> high, 4 <span class="keyword">for</span> low, 5 <span class="keyword">for</span> close
+</pre>
+<h2 id="2">Outputs</h2>
+<pre class="language-matlab">dataRange   :   (nx1 datetime) all <span class="string">dates</span> <span class="string">from</span> <span class="string">matching</span> <span class="string">stock</span> <span class="string">prices</span>
+stockIndex  :   (1xn string) all <span class="string">stock</span> <span class="string">trading</span> <span class="string">symbols</span>
+dataOutput  :   (nxn double) all <span class="string">stock</span> <span class="string">prices</span> <span class="string">for</span> <span class="string">all</span> <span class="string">given</span> <span class="string">dates</span>
+</pre>
+<p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2026a</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%% DataProcessing
+% Computes stock prices into matrices given price points 
+%
+%% Inputs
+% 
+%   pricesUsed  :   (1x1 double) 2 for open, 3 for high, 4 for low, 5 for close
+%
+%% Outputs
+%
+%   dataRange   :   (nx1 datetime) all dates from matching stock prices
+%   stockIndex  :   (1xn string) all stock trading symbols
+%   dataOutput  :   (nxn double) all stock prices for all given dates
+
+function [dateRange, stockIndex, dataOutput] = DataProcessing(pricesUsed)
+
+    
+    ADBE = readtable("StockData/ADOBE INC (01-21-2025 _ 04-28-2026).csv");
+    ADSK = readtable("StockData/AUTODESK INC (05-02-2025 _ 04-28-2026).csv");
+    DVLT = readtable("StockData/DATAVAULT AI INC (01-29-2025 _ 04-28-2026).csv");
+    BIRD = readtable("StockData/ALLBIRDS INC (05-02-2025 _ 04-28-2026).csv");
+    FLUT = readtable("StockData/FLUTTER ENTMT PLC (05-02-2025 _ 04-28-2026).csv");
+    FDS = readtable("StockData/FACTSET RESH SYS INC (02-13-2025 _ 04-28-2026).csv");
+    GME = readtable("StockData/GAMESTOP CORP (05-02-2025 _ 04-28-2026).csv");
+    HMY = readtable("StockData/HARMONY GOLD MNG LTD (05-02-2025 _ 04-28-2026).csv");
+    NFLX = readtable("StockData/NETFLIX INC. (02-12-2025 _ 04-28-2026).csv");
+    RDDT = readtable("StockData/REDDIT INC (05-02-2025 _ 04-28-2026).csv");
+
+    % Luke's Stock
+    SNDK = readtable("StockData/SANDISK.csv");
+    RVMD = readtable("StockData/RVMD.csv");
+    RKLB = readtable("StockData/RKLB.csv");
+    NVDA = readtable("StockData/NVIDIA.csv");
+    LITE = readtable("StockData/LITE.csv");
+    FIX = readtable("StockData/FIX.csv");
+    CIEN = readtable("StockData/CIEN.csv");
+    ASTS = readtable("StockData/ASTS.csv");
+    AAPL = readtable("StockData/APPLE.csv");
+    AMD = readtable("StockData/AMD.csv");
+
+
+    GME(1,:);
+    GME.Properties.VariableNames;
+    
+    % Get it all preproccessed to the same date range
+    dateRange = table2array(ADBE(1:248, 1));
+    stockIndex = ["AAPL", "ADBE","ADSK", "AMD", "ASTS", ...
+        "BIRD", "CIEN", "DVLT", "FIX", "FLUT","FDS","GME", ...
+        "HMY", "LITE", "NFLX", "NVDA", "RDDT", "RKLB", "RVMD", "SNDK"];
+    dataOutput = zeros(248,20);
+    dataOutput(:,1) = table2array(AAPL(3:250, pricesUsed));
+    dataOutput(:,2) = table2array(ADBE(1:248, pricesUsed));
+    dataOutput(:,3) = table2array(ADSK(1:248, pricesUsed));
+    dataOutput(:,4) = table2array(AMD(3:250, pricesUsed));
+    dataOutput(:,5) = table2array(ASTS(3:250, pricesUsed));
+    dataOutput(:,6) = table2array(BIRD(1:248, pricesUsed));
+    dataOutput(:,7) = table2array(CIEN(3:250, pricesUsed));
+    dataOutput(:,8) = table2array(DVLT(1:248, pricesUsed));
+    dataOutput(:,9) = table2array(FIX(3:250, pricesUsed));
+    dataOutput(:,10) = table2array(FLUT(1:248, pricesUsed));
+    dataOutput(:,11) = table2array(FDS(1:248, pricesUsed));
+    dataOutput(:,12) = table2array(GME(1:248, pricesUsed));
+    dataOutput(:,13) = table2array(HMY(1:248, pricesUsed));
+    dataOutput(:,14) = table2array(LITE(3:250, pricesUsed));
+    dataOutput(:,15) = table2array(NFLX(1:248, pricesUsed));
+    dataOutput(:,16) = table2array(NVDA(3:250, pricesUsed));
+    dataOutput(:,17) = table2array(RDDT(1:248, pricesUsed));
+    dataOutput(:,18) = table2array(RKLB(3:250, pricesUsed));
+    dataOutput(:,19) = table2array(RVMD(3:250, pricesUsed));
+    dataOutput(:,20) = table2array(SNDK(3:250, pricesUsed));
+end
+##### SOURCE END #####
+-->
+</body>
+</html>
