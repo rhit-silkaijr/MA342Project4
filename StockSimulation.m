@@ -9,7 +9,7 @@ function [P] = StockSimulation(Po, t)
 
     for i=1:change_periods
         for j = 1:n
-            PoDiff(i, j) = Po(i+1, j)-Po(i, j);
+            PoDiff(i, j) = (Po(i+1, j)-Po(i, j))/Po(i,j);
         end
     end
 
