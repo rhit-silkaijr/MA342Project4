@@ -20,12 +20,11 @@ function [P] = StockSimulation(Po, t)
     % for every single day
 
     P = zeros(t,n);
-    for to = 1:t
-            Pt = Po(length(Po), :);
-            P(to, :) = Pt.*exp((mu - (sigma.^2)./2).*to + sigma.*sqrt(to).*randn(1,n));
-            %P(to) = Pt + mu * Pt * to + sigma * Pt * sqrt(to) + phi(to);
-    end
     % Append the initial value to the beginning
     P = [Po(length(Po), :); P];
-
+    %P = [Po(1, :); P];
+    for to = 1:t
+            Pt = P(to,:);
+            P(to+1, :) = Pt.*exp((mu - (sigma.^2)/2) + sigma.*randn(1,n));
+    end
 end

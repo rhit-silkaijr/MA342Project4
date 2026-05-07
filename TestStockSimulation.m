@@ -1,5 +1,5 @@
 [dateRange, stockIndex, P] = DataProcessing(5);
-inputData = P(:,2);
+inputData = P(:,20);
 numRuns = 5;
 numDaysPredicted = 10;
 test = zeros(numDaysPredicted+1,numRuns);
